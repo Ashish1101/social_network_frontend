@@ -3,14 +3,12 @@ import PosstForm from './PostForm'
 import Post from './Post'
 import {useQuery} from '@apollo/client'
 import {GET_ALL_POST} from '../../Graphql/Query'
-import { CircularProgress , LinearProgress } from '@material-ui/core'
+import { CircularProgress } from '@material-ui/core'
 
 const Dashboard = () => {
    
    //read all user posts here and pass id of all post in post component
-   const {data , loading , error} = useQuery(GET_ALL_POST , {
-       fetchPolicy: 'cache-and-network'
-   })
+   const {data , loading , error} = useQuery(GET_ALL_POST)
    console.log('data of posts' , data )
 
     return (
@@ -19,7 +17,7 @@ const Dashboard = () => {
             <div className="col-span-2">
                 <PosstForm />
                 {loading && (<CircularProgress className="md:ml-72 md:mt-32 m-44" color="primary" size="3rem" />)}
-                {data?.readPostsOfUser?.posts.map(item => <Post key={item._id} postId={item._id} />)}
+                {data?.readPostsOfUser?.posts?.map(item => <Post key={item._id} postId={item._id} />)}
             </div>
             <div className="md:visible invisible">Hello chat</div>
         </div>

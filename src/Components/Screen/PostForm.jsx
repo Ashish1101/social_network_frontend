@@ -20,13 +20,16 @@ const PostForm = () => {
     const [createPost , {data , loading , error}] = useMutation(CREATE_POST, {
       update(cache , {data}) {
         const newPost = data?.createPost;
-       const existingPosts = cache.readQuery({
+        console.log('data ' , data)
+        console.log('data with create' , data?.createPost)
+        const existingPosts = cache.readQuery({
          query: GET_ALL_POST
        })
 
        cache.writeQuery({
          query : GET_ALL_POST,
          data : produce(existingPosts , x => {
+           //x here is the data of GET_ALL_POST
            x.readPostsOfUser.posts.push(newPost)
          })
        })

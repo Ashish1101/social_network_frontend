@@ -48,6 +48,7 @@ const client = new ApolloClient({
 
 function App() {
 	const token = localStorage.getItem('token')
+	
 	return (
 		<ApolloProvider client={client}>
 			<ThemeProvider>
